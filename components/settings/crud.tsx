@@ -52,6 +52,7 @@ export function CrudTable<T extends { [key: string]: any }>({ items, columns, on
         <input
           type="checkbox"
           checked={editingItem[column.key]}
+          aria-label={String(column.label)}
           onChange={(e) =>
             setEditingItem({
               ...editingItem,
@@ -65,6 +66,7 @@ export function CrudTable<T extends { [key: string]: any }>({ items, columns, on
         <select
           value={editingItem[column.key]}
           className="p-2 rounded-md border bg-transparent"
+          aria-label={String(column.label)}
           onChange={(e) =>
             setEditingItem({
               ...editingItem,
@@ -102,6 +104,7 @@ export function CrudTable<T extends { [key: string]: any }>({ items, columns, on
           <Input
             type="text"
             value={(editingItem[column.key] as string) || ""}
+            aria-label={String(column.label)}
             onChange={(e) =>
               setEditingItem({
                 ...editingItem,
@@ -118,6 +121,7 @@ export function CrudTable<T extends { [key: string]: any }>({ items, columns, on
       <Input
         type="text"
         value={editingItem[column.key] || ""}
+        aria-label={String(column.label)}
         onChange={(e) =>
           setEditingItem({
             ...editingItem,
@@ -134,6 +138,7 @@ export function CrudTable<T extends { [key: string]: any }>({ items, columns, on
         <input
           type="checkbox"
           checked={Boolean(newItem[column.key] || column.defaultValue)}
+          aria-label={String(column.label)}
           onChange={(e) =>
             setNewItem({
               ...newItem,
@@ -147,6 +152,7 @@ export function CrudTable<T extends { [key: string]: any }>({ items, columns, on
         <select
           value={String(newItem[column.key] || column.defaultValue || "")}
           className="p-2 rounded-md border bg-transparent"
+          aria-label={String(column.label)}
           onChange={(e) =>
             setNewItem({
               ...newItem,
@@ -181,24 +187,26 @@ export function CrudTable<T extends { [key: string]: any }>({ items, columns, on
               }
             />
           </div>
-            <Input
-              type="text"
-              value={String(newItem[column.key] || column.defaultValue || "")}
-              onChange={(e) =>
-                setNewItem({
-                  ...newItem,
-                  [column.key]: e.target.value,
-                })
-              }
-              placeholder="#FFFFFF"
-            />
-          </div>
+          <Input
+            type="text"
+            value={String(newItem[column.key] || column.defaultValue || "")}
+            aria-label={String(column.label)}
+            onChange={(e) =>
+              setNewItem({
+                ...newItem,
+                [column.key]: e.target.value,
+              })
+            }
+            placeholder="#FFFFFF"
+          />
+        </div>
       )
     }
     return (
       <Input
         type={column.type || "text"}
         value={String(newItem[column.key] || column.defaultValue || "")}
+        aria-label={String(column.label)}
         onChange={(e) =>
           setNewItem({
             ...newItem,
@@ -279,10 +287,10 @@ export function CrudTable<T extends { [key: string]: any }>({ items, columns, on
                 <div className="flex gap-2">
                   {editingId === (item.code || item.id) ? (
                     <>
-                      <Button size="sm" onClick={() => handleEdit(item.code || item.id)}>
+                      <Button size="sm" onClick={() => handleEdit(item.code || item.id)} aria-label="Save changes">
                         Save
                       </Button>
-                      <Button size="sm" variant="outline" onClick={() => setEditingId(null)}>
+                      <Button size="sm" variant="outline" onClick={() => setEditingId(null)} aria-label="Cancel editing">
                         Cancel
                       </Button>
                     </>
@@ -296,12 +304,18 @@ export function CrudTable<T extends { [key: string]: any }>({ items, columns, on
                             startEditing(item)
                             setIsAdding(false)
                           }}
+                          aria-label={`Edit ${String(item.name || item.code || 'item')}`}
                         >
                           <Edit />
                         </Button>
                       )}
                       {item.isDeletable && (
-                        <Button variant="ghost" size="icon" onClick={() => handleDelete(item.code || item.id)}>
+                        <Button 
+                          variant="ghost" 
+                          size="icon" 
+                          onClick={() => handleDelete(item.code || item.id)}
+                          aria-label={`Delete ${String(item.name || item.code || 'item')}`}
+                        >
                           <Trash2 />
                         </Button>
                       )}
@@ -320,10 +334,10 @@ export function CrudTable<T extends { [key: string]: any }>({ items, columns, on
               ))}
               <TableCell>
                 <div className="flex gap-2">
-                  <Button size="sm" onClick={handleAdd}>
+                  <Button size="sm" onClick={handleAdd} aria-label="Save new item">
                     Save
                   </Button>
-                  <Button size="sm" variant="outline" onClick={() => setIsAdding(false)}>
+                  <Button size="sm" variant="outline" onClick={() => setIsAdding(false)} aria-label="Cancel adding new item">
                     Cancel
                   </Button>
                 </div>
@@ -338,6 +352,7 @@ export function CrudTable<T extends { [key: string]: any }>({ items, columns, on
             setIsAdding(true)
             setEditingId(null)
           }}
+          aria-label="Add new item"
         >
           Add New
         </Button>

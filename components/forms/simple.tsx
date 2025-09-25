@@ -32,6 +32,7 @@ export function FormInput({ title, hideIfEmpty = false, isRequired = false, ...p
       {title && <span className="text-sm font-medium">{title}</span>}
       <Input
         {...props}
+        id={props.id || (props as { name?: string }).name}
         className={cn("bg-background", isRequired && isEmpty && "bg-yellow-50", props.className)}
         data-1p-ignore
       />
@@ -74,6 +75,7 @@ export function FormTextarea({ title, hideIfEmpty = false, isRequired = false, .
       <Textarea
         ref={textareaRef}
         {...props}
+        id={props.id || (props as { name?: string }).name}
         className={cn("bg-background", isRequired && isEmpty && "bg-yellow-50", props.className)}
         data-1p-ignore
       />
@@ -89,6 +91,8 @@ export const FormSelect = ({
   hideIfEmpty = false,
   isRequired = false,
   onValueChange,
+  name,
+  id,
   ...props
 }: {
   items: Array<{ code: string; name: string; color?: string; badge?: string; logo?: string }>
@@ -97,8 +101,23 @@ export const FormSelect = ({
   placeholder?: string
   hideIfEmpty?: boolean
   isRequired?: boolean
+  name?: string
+  id?: string
 } & SelectProps) => {
-  const isEmpty = (!props.defaultValue || props.defaultValue.toString().trim() === "") && !props.value
+  const [internalValue, setInternalValue] = useState<string | undefined>(
+    (props.value as string | undefined) || (props.defaultValue as string | undefined)
+  )
+  const isControlled = props.value !== undefined
+  const selectValue = (isControlled ? (props.value as string | undefined) : internalValue) || ""
+  const isEmpty = !selectValue || selectValue.toString().trim() === ""
+
+  const labelId = title ? `${id || name || "select"}-label` : undefined
+  const controlId = id || name
+
+  const handleChange = (v: string) => {
+    if (!isControlled) setInternalValue(v)
+    onValueChange?.(v)
+  }
 
   if (hideIfEmpty && isEmpty) {
     return null
@@ -106,13 +125,23 @@ export const FormSelect = ({
 
   return (
     <span className="flex flex-col gap-1">
-      {title && <span className="text-sm font-medium">{title}</span>}
+      {title && (
+        <span className="text-sm font-medium" id={labelId}>
+          {title}
+        </span>
+      )}
+      {/* Hidden input to ensure form submissions include this value */}
+      {name && <input type="hidden" name={name} value={selectValue} />}
       <Select
-        value={props.value}
-        onValueChange={onValueChange}
         {...props}
+        onValueChange={handleChange}
+        {...(isControlled ? { value: props.value as string } : { defaultValue: props.defaultValue as string })}
       >
-        <SelectTrigger className={cn("w-full min-w-[150px] bg-background", isRequired && isEmpty && "bg-yellow-50")}>
+        <SelectTrigger
+          id={controlId}
+          aria-labelledby={labelId}
+          className={cn("w-full min-w-[150px] bg-background", isRequired && isEmpty && "bg-yellow-50")}
+        >
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
         <SelectContent>
@@ -120,9 +149,7 @@ export const FormSelect = ({
           {items.map((item) => (
             <SelectItem key={item.code} value={item.code}>
               <div className="flex items-center gap-2 text-base pr-2">
-                {item.logo && (
-                  <Image src={item.logo} alt={item.name} width={20} height={20} className="rounded-full" />
-                )}
+                {item.logo && <Image src={item.logo} alt={item.name} width={20} height={20} className="rounded-full" />}
                 {item.badge && <Badge className="px-2">{item.badge}</Badge>}
                 {!item.badge && item.color && (
                   <div className="w-2 h-2 rounded-full" style={{ backgroundColor: item.color }} />

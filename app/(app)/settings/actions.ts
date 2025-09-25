@@ -188,15 +188,26 @@ export async function addCategoryAction(userId: string, data: Prisma.CategoryCre
     return { success: false, error: validatedForm.error.message }
   }
 
-  const category = await createCategory(userId, {
-    code: codeFromName(validatedForm.data.name),
-    name: validatedForm.data.name,
-    llm_prompt: validatedForm.data.llm_prompt,
-    color: validatedForm.data.color || "",
-  })
-  revalidatePath("/settings/categories")
+  const code = codeFromName(validatedForm.data.name)
+  try {
+    const category = await createCategory(userId, {
+      code,
+      name: validatedForm.data.name,
+      llm_prompt: validatedForm.data.llm_prompt,
+      color: validatedForm.data.color || "",
+    })
+    revalidatePath("/settings/categories")
 
-  return { success: true, category }
+    return { success: true, category }
+  } catch (error: unknown) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2002") {
+      return {
+        success: false,
+        error: `Category with the code "${code}" already exists. Try a different name.`,
+      }
+    }
+    return { success: false, error: "Failed to create category" }
+  }
 }
 
 export async function editCategoryAction(userId: string, code: string, data: Prisma.CategoryUpdateInput) {

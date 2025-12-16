@@ -2,6 +2,7 @@ import { Card, CardContent, CardTitle } from "@/components/ui/card"
 import { ColoredText } from "@/components/ui/colored-text"
 import config from "@/lib/config"
 import { Mail } from "lucide-react"
+import Link from "next/link"
 import { redirect } from "next/navigation"
 
 export default async function ChoosePlanPage() {

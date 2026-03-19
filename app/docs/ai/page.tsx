@@ -14,19 +14,19 @@ export default async function AI() {
         </a>
         <br />
         <strong className="text-slate-700">Domain</strong>:{" "}
-        <a href="https://taxhacker.app" className="text-blue-600 hover:text-blue-800">
-          https://taxhacker.app
+        <a href="https://TaxFlow ES.app" className="text-blue-600 hover:text-blue-800">
+          https://TaxFlow ES.app
         </a>
       </p>
 
       <p className="text-gray-700 leading-relaxed mb-6">
-        At TaxHacker, we use artificial intelligence (&quot;AI&quot;) to power the core features of our platform. This
+        At TaxFlow ES, we use artificial intelligence (&quot;AI&quot;) to power the core features of our platform. This
         document outlines how and why we use AI technologies, what data is processed, and how it may affect you as a
         user.
       </p>
 
-      <h2 className="text-2xl font-semibold text-gray-800 mt-8 mb-4">1. Purpose of AI in TaxHacker</h2>
-      <p className="text-gray-700 leading-relaxed mb-3">AI is essential to the TaxHacker experience. It is used for:</p>
+      <h2 className="text-2xl font-semibold text-gray-800 mt-8 mb-4">1. Purpose of AI in TaxFlow ES</h2>
+      <p className="text-gray-700 leading-relaxed mb-3">AI is essential to the TaxFlow ES experience. It is used for:</p>
       <ul className="list-disc pl-6 space-y-2 mb-6 text-gray-700">
         <li>Optical Character Recognition (OCR) of scanned invoices and receipts</li>
         <li>Automatic categorization and tagging of financial transactions</li>
@@ -64,7 +64,7 @@ export default async function AI() {
       </ul>
       <p className="bg-amber-50 p-4 rounded-lg border border-amber-200 mb-4">
         <strong className="text-amber-600">⚠️ Note:</strong> This data is <strong>not anonymized or redacted</strong>{" "}
-        before transmission. By using TaxHacker, you acknowledge and consent to this transfer.
+        before transmission. By using TaxFlow ES, you acknowledge and consent to this transfer.
       </p>
       <p className="text-gray-700 leading-relaxed mb-6">
         We store <strong>structured outputs</strong> from the AI (e.g., parsed fields, categorization) in your account
@@ -84,7 +84,7 @@ export default async function AI() {
 
       <h2 className="text-2xl font-semibold text-gray-800 mt-8 mb-4">5. Opt-Out and Core Dependency</h2>
       <p className="text-gray-700 leading-relaxed mb-6">
-        AI processing is a fundamental component of TaxHacker and cannot be disabled. If you do not consent to your data
+        AI processing is a fundamental component of TaxFlow ES and cannot be disabled. If you do not consent to your data
         being processed via AI, you should not use the platform.
       </p>
 
@@ -105,7 +105,7 @@ export default async function AI() {
         <strong>no guarantees of accuracy</strong>, completeness, or suitability for tax, legal, or financial purposes.
       </p>
       <p className="bg-red-50 p-4 rounded-lg border border-red-200 mb-6">
-        <strong className="text-red-600">⚠️ Important:</strong> TaxHacker is <strong>not a substitute</strong> for a
+        <strong className="text-red-600">⚠️ Important:</strong> TaxFlow ES is <strong>not a substitute</strong> for a
         certified accountant, tax advisor, or legal counsel. Use at your own risk.
       </p>
     </div>

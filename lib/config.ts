@@ -16,7 +16,7 @@ const envSchema = z.object({
     .default("please-set-your-key-here"),
   DISABLE_SIGNUP: z.enum(["true", "false"]).default("false"),
   RESEND_API_KEY: z.string().default("please-set-your-resend-api-key-here"),
-  RESEND_FROM_EMAIL: z.string().default("TaxHacker <user@localhost>"),
+  RESEND_FROM_EMAIL: z.string().default("TaxFlow ES <user@localhost>"),
   RESEND_AUDIENCE_ID: z.string().default(""),
   STRIPE_SECRET_KEY: z.string().default(""),
   STRIPE_WEBHOOK_SECRET: z.string().default(""),
@@ -26,7 +26,7 @@ const env = envSchema.parse(process.env)
 
 const config = {
   app: {
-    title: "TaxHacker",
+    title: "TaxFlow ES",
     description: "Your personal AI accountant",
     version: process.env.npm_package_version || "0.0.1",
     baseURL: env.BASE_URL || `http://localhost:${env.PORT || "7331"}`,

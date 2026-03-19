@@ -104,7 +104,7 @@ export async function GET(request: Request) {
     return new NextResponse(archive, {
       headers: {
         "Content-Type": "application/octet-stream",
-        "Content-Disposition": `attachment; filename="taxhacker-backup.zip"`,
+        "Content-Disposition": `attachment; filename="TaxFlow ES-backup.zip"`,
       },
     })
   } catch (error) {

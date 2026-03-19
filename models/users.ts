@@ -5,7 +5,7 @@ import { isDatabaseEmpty } from "./defaults"
 import { createUserDefaults } from "./defaults"
 
 export const SELF_HOSTED_USER = {
-  email: "taxhacker@localhost",
+  email: "TaxFlow ES@localhost",
   name: "Self-Hosted Mode",
   membershipPlan: "unlimited",
 }

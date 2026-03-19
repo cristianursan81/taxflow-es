@@ -18,7 +18,7 @@ export async function WelcomeWidget() {
       <div className="flex flex-col">
         <CardTitle className="flex items-center justify-between">
           <span className="text-2xl font-bold">
-            <ColoredText>Hey, I&apos;m TaxHacker 👋</ColoredText>
+            <ColoredText>Hey, I&apos;m TaxFlow ES 👋</ColoredText>
           </span>
           <Button
             variant="outline"
@@ -69,15 +69,15 @@ export async function WelcomeWidget() {
           </p>
         </CardDescription>
         <div className="mt-2">
-          <Link href="https://github.com/vas3k/TaxHacker" className="text-blue-500 hover:underline">
+          <Link href="https://github.com/vas3k/TaxFlow ES" className="text-blue-500 hover:underline">
             Source Code
           </Link>
           <span className="mx-2">|</span>
-          <Link href="https://github.com/vas3k/TaxHacker/issues" className="text-blue-500 hover:underline">
+          <Link href="https://github.com/vas3k/TaxFlow ES/issues" className="text-blue-500 hover:underline">
             Request New Feature
           </Link>
           <span className="mx-2">|</span>
-          <Link href="https://github.com/vas3k/TaxHacker/issues" className="text-blue-500 hover:underline">
+          <Link href="https://github.com/vas3k/TaxFlow ES/issues" className="text-blue-500 hover:underline">
             Report a Bug
           </Link>
           <span className="mx-2">|</span>

@@ -8,8 +8,8 @@ export default async function Terms() {
         <strong className="text-slate-700">Effective Date:</strong> April 22, 2025
         <br />
         <strong className="text-slate-700">Service:</strong>{" "}
-        <a href="https://taxhacker.app" className="text-blue-600 hover:text-blue-800">
-          https://taxhacker.app
+        <a href="https://TaxFlow ES.app" className="text-blue-600 hover:text-blue-800">
+          https://TaxFlow ES.app
         </a>
         <br />
         <strong className="text-slate-700">Contact:</strong>{" "}
@@ -19,13 +19,13 @@ export default async function Terms() {
       </p>
 
       <p className="text-slate-700 mb-6 leading-relaxed">
-        These Terms of Service (&quot;Terms&quot;) govern your access to and use of TaxHacker, an automated invoice
+        These Terms of Service (&quot;Terms&quot;) govern your access to and use of TaxFlow ES, an automated invoice
         analyzer and expense tracker powered by artificial intelligence (AI). By accessing or using our services, you
         agree to be bound by these Terms.
       </p>
 
       <h2 className="text-2xl font-semibold text-slate-800 mb-4">1. Service Overview</h2>
-      <p className="text-slate-700 mb-3">TaxHacker offers:</p>
+      <p className="text-slate-700 mb-3">TaxFlow ES offers:</p>
       <ul className="list-disc pl-6 mb-6 space-y-2 text-slate-700">
         <li>
           A <strong className="text-slate-800">cloud-based platform</strong> with paid subscription tiers
@@ -44,7 +44,7 @@ export default async function Terms() {
       <h2 className="text-2xl font-semibold text-slate-800 mb-4">2. Eligibility and Account Use</h2>
       <ul className="list-disc pl-6 mb-6 space-y-2 text-slate-700">
         <li>
-          You must be at least <strong className="text-slate-800">18 years old</strong> to use TaxHacker.
+          You must be at least <strong className="text-slate-800">18 years old</strong> to use TaxFlow ES.
         </li>
         <li>
           You may register and maintain <strong className="text-slate-800">multiple accounts</strong>.
@@ -89,7 +89,7 @@ export default async function Terms() {
       <h2 className="text-2xl font-semibold text-slate-800 mb-4">5. AI Usage and Third-Party Integrations</h2>
       <ul className="list-disc pl-6 mb-6 space-y-2 text-slate-700">
         <li>
-          TaxHacker uses <strong className="text-slate-800">OpenAI (ChatGPT)</strong> and other third-party APIs to
+          TaxFlow ES uses <strong className="text-slate-800">OpenAI (ChatGPT)</strong> and other third-party APIs to
           process and analyze documents.
         </li>
         <li>
@@ -109,7 +109,7 @@ export default async function Terms() {
           resulting analysis.
         </li>
         <li>
-          TaxHacker does <strong className="text-slate-800">not claim any rights</strong> over your data.
+          TaxFlow ES does <strong className="text-slate-800">not claim any rights</strong> over your data.
         </li>
         <li>
           You are free to <strong className="text-slate-800">reuse, download, publish, or export</strong> any data
@@ -120,7 +120,7 @@ export default async function Terms() {
       <h2 className="text-2xl font-semibold text-slate-800 mb-4">7. Limitations of Liability</h2>
       <ul className="list-disc pl-6 mb-6 space-y-2 text-slate-700">
         <li>
-          TaxHacker is provided <strong className="text-slate-800">&quot;as is&quot;</strong>, without warranties of any
+          TaxFlow ES is provided <strong className="text-slate-800">&quot;as is&quot;</strong>, without warranties of any
           kind.
         </li>
         <li>
@@ -128,7 +128,7 @@ export default async function Terms() {
           or the suitability of our services for accounting, tax filing, or compliance purposes.
         </li>
         <li className="bg-yellow-50 p-3 border-l-4 border-yellow-400">
-          <strong className="text-slate-800">⚠️ Important:</strong> TaxHacker is{" "}
+          <strong className="text-slate-800">⚠️ Important:</strong> TaxFlow ES is{" "}
           <strong className="text-slate-800">not a substitute</strong> for professional tax or legal advice. You use the
           service <strong className="text-slate-800">at your own risk</strong>.
         </li>

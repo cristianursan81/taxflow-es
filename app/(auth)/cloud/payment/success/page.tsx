@@ -48,7 +48,7 @@ export default async function CloudPaymentSuccessPage({
           <ColoredText>Payment Successful</ColoredText>
         </CardTitle>
         <CardDescription className="text-center text-xl">
-          Welcome to TaxHacker, {user.name}. You can login to your account now
+          Welcome to TaxFlow ES, {user.name}. You can login to your account now
         </CardDescription>
         <CardContent className="w-full">
           <LoginForm defaultEmail={user.email} />

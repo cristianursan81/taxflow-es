@@ -14,7 +14,7 @@ export default async function LoginPage() {
     <Card className="w-full max-w-xl mx-auto p-8 flex flex-col items-center justify-center gap-4">
       <Image src="/logo/512.png" alt="Logo" width={144} height={144} className="w-36 h-36" />
       <CardTitle className="text-3xl font-bold ">
-        <ColoredText>TaxHacker: Cloud Edition</ColoredText>
+        <ColoredText>TaxFlow ES: Cloud Edition</ColoredText>
       </CardTitle>
       <CardContent className="w-full">
         <LoginForm />

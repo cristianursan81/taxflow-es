@@ -34,7 +34,7 @@ export function NewsletterForm() {
       <div className="max-w-2xl mx-auto text-center">
         <h3 className="text-2xl font-semibold mb-4">Stay Tuned</h3>
         <p className="text-gray-600 mb-6">
-          We&apos;re working hard on making TaxHacker useful for everyone. Subscribe to our emails to get notified about
+          We&apos;re working hard on making TaxFlow ES useful for everyone. Subscribe to our emails to get notified about
           our plans and new features. No marketing, ads or spam.
         </p>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4 max-w-md mx-auto">

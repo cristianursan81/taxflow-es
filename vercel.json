@@ -1,0 +1,57 @@
+{
+  "version": 2,
+  "name": "taxflow-es",
+  "alias": "taxflow-es",
+  "regions": ["fra1", "mad1"],
+  "build": {
+    "env": {
+      "DATABASE_URL": "@database-url",
+      "BETTER_AUTH_SECRET": "@auth-secret",
+      "OPENAI_API_KEY": "@openai-key",
+      "NODE_ENV": "production",
+      "SKIP_ENV_VALIDATION": "true"
+    }
+  },
+  "functions": {
+    "pages/api/**/*.js": {
+      "maxDuration": 30
+    },
+    "app/**/*.js": {
+      "maxDuration": 30
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options", 
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    }
+  ],
+  "installCommand": "npm install --legacy-peer-deps",
+  "buildCommand": "npx prisma generate && npm run build",
+  "outputDirectory": ".next",
+  "framework": "nextjs",
+  "nodeVersion": "18.x"
+}

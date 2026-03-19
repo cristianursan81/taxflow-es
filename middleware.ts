@@ -7,7 +7,7 @@ export default async function middleware(request: NextRequest) {
     return NextResponse.next()
   }
 
-  const sessionCookie = getSessionCookie(request, { cookiePrefix: "TaxFlow ES" })
+  const sessionCookie = getSessionCookie(request, { cookiePrefix: "taxflow-es" })
   if (!sessionCookie) {
     return NextResponse.redirect(new URL(globalConfig.auth.loginUrl, request.url))
   }

@@ -11,7 +11,7 @@ Here's how to migrate properly:
 ```yaml
 services:
   app:
-    image: ghcr.io/vas3k/TaxFlow ES:v0.3.0
+    image: ghcr.io/your-org/taxflow-es:v0.3.0
     ports:
       - "7331:7331"
       
@@ -29,14 +29,14 @@ Go to your app -> Settings -> Backups -> Download Data Archive
 
 Save .zip archive on your machine. 
 
-## Step 3: Upgrade your TaxFlow ES instance
+## Step 3: Upgrade your taxflow-es instance
 
 Update your docker compose to latest version again.
 
 ```yaml
 services:
   app:
-    image: ghcr.io/vas3k/TaxFlow ES:latest
+    image: ghcr.io/your-org/taxflow-es:latest
     ports:
       - "7331:7331"
       

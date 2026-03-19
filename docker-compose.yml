@@ -1,35 +1,26 @@
 services:
   app:
-    image: ghcr.io/vas3k/TaxFlow ES:latest
+    build: .
+    image: taxflow-es:latest
     ports:
       - "7331:7331"
     environment:
       - NODE_ENV=production
       - SELF_HOSTED_MODE=true
       - UPLOAD_PATH=/app/data/uploads
-      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/TaxFlow ES
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/taxflow_es
     volumes:
       - ./data:/app/data
     restart: unless-stopped
     depends_on:
       - postgres
-    logging:
-      driver: "local"
-      options:
-        max-size: "100M"
-        max-file: "3"
 
   postgres:
     image: postgres:17-alpine
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=TaxFlow ES
+      - POSTGRES_DB=taxflow_es
     volumes:
       - ./pgdata:/var/lib/postgresql/data
     restart: unless-stopped
-    logging:
-      driver: "local"
-      options:
-        max-size: "100M"
-        max-file: "3"

@@ -1,23 +1,41 @@
 import { prisma } from "@/lib/db"
 
-export const DEFAULT_PROMPT_ANALYSE_NEW_FILE = `You are an accountant and invoice analysis assistant. Extract following information from the given invoice: 
+export const DEFAULT_PROMPT_ANALYSE_NEW_FILE = `Eres un asistente contable especializado en el sistema fiscal español. Analiza el documento (factura, ticket, recibo) y extrae la siguiente información:
 
 {fields}
 
-Also try to extract "items": all separate products or items from the invoice
+CAMPOS ESPECÍFICOS ESPAÑOLES OBLIGATORIOS:
+- supplierName: Nombre del proveedor/emisor
+- supplierTaxId: NIF/CIF del proveedor (formato español)
+- invoiceNumber: Número de factura o ticket
+- invoiceType: Tipo de documento (factura, ticket, recibo, factura simplificada)
+- baseAmount: Importe base (sin IVA)
+- vatRate: Tipo de IVA aplicado (21%, 10%, 4%, exento)
+- vatAmount: Cuota de IVA
+- irpfRate: Porcentaje de IRPF (si aplica)
+- irpfAmount: Retención de IRPF (si aplica)
+- grossTotal: Total bruto (base + IVA)
+- deductible: Si el gasto es deducible (true/false)
+- taxValidationStatus: Estado de validación fiscal
 
-Where categories are:
+También extrae "items": todos los productos o servicios detallados de la factura
 
+Categorías disponibles:
 {categories}
 
-And projects are:
-
+Proyectos disponibles:
 {projects}
 
-IMPORTANT RULES:
-- Do not include any other text in your response!
-- If you can't find something leave it blank, NEVER make up information
-- Return only one object`
+REGLAS CRÍTICAS PARA ESPAÑA:
+- SIEMPRE extraer y validar NIF/CIF del emisor
+- Calcular correctamente base imponible, IVA e IRPF
+- Identificar el tipo correcto de IVA (general 21%, reducido 10%, superreducido 4%, exento)
+- Detectar si aplica retención IRPF (servicios profesionales, arrendamientos, etc.)
+- Marcar como NO deducible: gastos personales, multas, lujo
+- Validar coherencia: base + IVA = total
+- Clasificar documento: factura completa vs ticket simplificado
+- NUNCA inventar datos, dejar en blanco si no está claro
+- Responder SOLO con un objeto JSON, sin texto adicional`
 
 export const DEFAULT_SETTINGS = [
   {
@@ -30,7 +48,7 @@ export const DEFAULT_SETTINGS = [
     code: "default_category",
     name: "Default Category",
     description: "",
-    value: "other",
+    value: "otros",
   },
   {
     code: "default_project",
@@ -60,45 +78,101 @@ export const DEFAULT_SETTINGS = [
 
 export const DEFAULT_CATEGORIES = [
   {
-    code: "ads",
-    name: "Advertisement",
-    color: "#882727",
-    llm_prompt: "ads, promos, online ads, etc",
+    code: "suministros",
+    name: "Suministros y Material",
+    color: "#c69713",
+    llm_prompt: "materiales, suministros, material de oficina, papelería, consumibles",
   },
   {
-    code: "swag",
-    name: "Swag and Goods",
-    color: "#882727",
-    llm_prompt: "swag, stickers, goods, etc",
+    code: "software_suscripciones",
+    name: "Software y Suscripciones",
+    color: "#8753fb",
+    llm_prompt: "software, suscripciones SaaS, licencias, applications, herramientas digitales",
   },
-  { code: "donations", name: "Gifts and Donations", color: "#1e6359", llm_prompt: "donations, gifts, charity" },
-  { code: "tools", name: "Equipment and Tools", color: "#c69713", llm_prompt: "equipment, tools" },
-  { code: "events", name: "Events and Conferences", color: "#ff8b32", llm_prompt: "events, conferences" },
-  { code: "food", name: "Food and Drinks", color: "#d40e70", llm_prompt: "food, drinks, business meals" },
-  { code: "insurance", name: "Insurance", color: "#050942", llm_prompt: "insurance, health, life" },
-  { code: "invoice", name: "Invoice", color: "#064e85", llm_prompt: "custom invoice, bill" },
-  { code: "communication", name: "Mobile and Internet", color: "#0e7d86", llm_prompt: "mobile, internet, phone" },
-  { code: "office", name: "Office Supplies", color: "#59b0b9", llm_prompt: "office, supplies, stationery" },
-  { code: "online", name: "Online Services", color: "#8753fb", llm_prompt: "online services, saas, subscriptions" },
-  { code: "rental", name: "Rental", color: "#050942", llm_prompt: "rental, lease" },
   {
-    code: "education",
-    name: "Education",
-    color: "#ee5d6c",
-    llm_prompt: "education, professional development, trainings",
+    code: "alquiler",
+    name: "Alquiler y Arrendamientos",
+    color: "#050942",
+    llm_prompt: "alquiler, arrendamiento, renting, leasing, location",
   },
-  { code: "salary", name: "Salary", color: "#ce4993", llm_prompt: "salary, wages, etc" },
-  { code: "fees", name: "Fees", color: "#6a0d83", llm_prompt: "fees, charges, penalties, etc" },
-  { code: "travel", name: "Travel Expenses", color: "#fb9062", llm_prompt: "travel, accommodation, etc" },
-  { code: "utility_bills", name: "Utility Bills", color: "#af7e2e", llm_prompt: "bills, electricity, water, etc" },
   {
-    code: "transport",
-    name: "Transport",
+    code: "telecomunicaciones",
+    name: "Telecomunicaciones",
+    color: "#0e7d86",
+    llm_prompt: "teléfono, internet, móvil, comunicaciones, fibra, ADSL",
+  },
+  {
+    code: "transporte",
+    name: "Transporte y Desplazamientos",
     color: "#800000",
-    llm_prompt: "transportation costs, fuel, car rental, vignettes, etc",
+    llm_prompt: "combustible, gasolina, diesel, transporte público, taxi, kilometraje, peajes",
   },
-  { code: "software", name: "Software", color: "#2b5a1d", llm_prompt: "software, licenses" },
-  { code: "other", name: "Other", color: "#121216", llm_prompt: "other, miscellaneous," },
+  {
+    code: "dietas_restauracion",
+    name: "Dietas y Restauración",
+    color: "#d40e70",
+    llm_prompt: "comidas de negocio, dietas, restaurante, catering, manutención",
+  },
+  {
+    code: "servicios_profesionales",
+    name: "Servicios Profesionales",
+    color: "#064e85",
+    llm_prompt: "asesoría, gestoría, abogados, consultores, servicios externos",
+  },
+  {
+    code: "formacion",
+    name: "Formación y Desarrollo",
+    color: "#ee5d6c",
+    llm_prompt: "cursos, formación, seminarios, congresos, educación professional",
+  },
+  {
+    code: "seguros",
+    name: "Seguros",
+    color: "#1e6359",
+    llm_prompt: "seguros, pólizas, prima de seguro, responsabilidad civil",
+  },
+  {
+    code: "suministros_energia",
+    name: "Suministros de Energía",
+    color: "#af7e2e",
+    llm_prompt: "electricidad, gas, agua, facturas de suministros básicos",
+  },
+  {
+    code: "publicidad_marketing",
+    name: "Publicidad y Marketing",
+    color: "#882727",
+    llm_prompt: "publicidad, marketing, promoción, anuncios, campañas",
+  },
+  {
+    code: "reparacion_mantenimiento",
+    name: "Reparación y Mantenimiento",
+    color: "#59b0b9",
+    llm_prompt: "reparaciones, mantenimiento, servicios técnicos",
+  },
+  {
+    code: "equipos_tecnologicos",
+    name: "Equipos Tecnológicos",
+    color: "#2b5a1d",
+    llm_prompt: "ordenadores, hardware, equipos informáticos, tecnología",
+  },
+  {
+    code: "gastos_financieros",
+    name: "Gastos Financieros",
+    color: "#6a0d83",
+    llm_prompt: "intereses, comisiones bancarias, gastos financieros",
+  },
+  {
+    code: "representacion",
+    name: "Gastos de Representación",
+    color: "#fb9062",
+    llm_prompt: "regalos de empresa, atenciones a clientes, representación",
+  },
+  {
+    code: "otros",
+    name: "Otros Gastos",
+    color: "#121216",
+    llm_prompt: "otros gastos deducibles, miscelánea",
+  },
 ]
 
 export const DEFAULT_PROJECTS = [{ code: "personal", name: "Personal", llm_prompt: "personal", color: "#1e202b" }]

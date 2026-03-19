@@ -1,12 +1,12 @@
 services:
   app:
-    image: ghcr.io/vas3k/TaxFlow ES:latest
-    container_name: TaxFlow ES_app
+    image: ghcr.io/your-org/taxflow-es:latest
+    container_name: taxflow-es_app
     networks:
-      - TaxFlow ES_network
+      - taxflow-es_network
     environment:
       - NODE_ENV=production
-      - BASE_URL=https://TaxFlow ES.app
+      - BASE_URL=https://taxflow-es.app
       - SELF_HOSTED_MODE=false
       - UPLOAD_PATH=/app/data/uploads
     env_file:
@@ -25,5 +25,5 @@ services:
         max-file: "3"
 
 networks:
-  TaxFlow ES_network:
+  taxflow-es_network:
     driver: bridge

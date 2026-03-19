@@ -38,6 +38,7 @@ yarn-error.log*
 
 # env files
 .env
+.env.local
 
 # vercel
 .vercel
@@ -48,6 +49,22 @@ next-env.d.ts
 
 # databases
 prisma/client
+dev.db
+dev.db-journal
+*.db
+*.db-journal
+
+# esquemas temporales
+prisma/schema-temp.prisma
+
+# test outputs y coverage
+coverage/
+test-results/
+playwright-report/
+playwright/.cache/
+
+# logs
+*.log
 pgdata
 *.db
 *.sqlite

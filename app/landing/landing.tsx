@@ -1,7 +1,11 @@
+import { Badge } from "@/components/ui/badge"
 import { ColoredText } from "@/components/ui/colored-text"
 import config from "@/lib/config"
 import Image from "next/image"
 import Link from "next/link"
+import TechnicalExpertiseSection from "@/components/TechnicalExpertiseSection"
+import EngagementModelsSection from "@/components/EngagementModelsSection"
+import ValuesSection from "@/components/ValuesSection"
 
 export default function LandingPage() {
   return (
@@ -39,14 +43,17 @@ export default function LandingPage() {
 
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-12">
-            <div className="inline-block px-6 py-3 rounded-full border-2 border-pink-600/50 text-sm font-medium mb-6 shadow-lg hover:shadow-xl transition-all duration-300">
-              🚀 Under Active Development
-            </div>
-            <h1 className="text-5xl font-bold tracking-tight sm:text-6xl mb-6 bg-gradient-to-r from-gray-900 via-pink-700 to-indigo-700 bg-clip-text text-transparent pb-2">
-              Let AI finally care about your taxes, scan your receipts and analyze your expenses
+            <Badge className="bg-teal-100 text-teal-700 hover:bg-teal-200 mb-6">
+              Soluciones a Medida
+            </Badge>
+            <h1 className="text-5xl lg:text-6xl font-bold text-slate-900 leading-tight mb-6">
+              Soluciones de software a medida
+              <span className="bg-gradient-to-r from-teal-600 to-cyan-600 bg-clip-text text-transparent">
+                {' '}para tu negocio
+              </span>
             </h1>
-            <p className="text-xl text-gray-700 mb-8 max-w-2xl mx-auto font-medium">
-              Self-hosted accounting app crafted for freelancers, indie-hackers and small businesses
+            <p className="text-xl text-slate-600 leading-relaxed mb-8 max-w-2xl mx-auto font-medium">
+              Diseñamos, desarrollamos y automatizamos procesos con tecnologías de vanguardia para impulsar tu crecimiento.
             </p>
             <div className="flex gap-4 justify-center text-sm md:text-lg">
               <Link
@@ -308,6 +315,10 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+
+      <TechnicalExpertiseSection />
+      <EngagementModelsSection />
+      <ValuesSection />
 
       {/* Deployment Options */}
       <section

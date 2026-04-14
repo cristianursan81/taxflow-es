@@ -73,3 +73,11 @@ pgdata
 *.db-journal
 # Sentry Config File
 .env.sentry-build-plugin
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Secrets
+secrets*
+*.key
